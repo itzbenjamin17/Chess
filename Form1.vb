@@ -1,6 +1,4 @@
 ﻿'The top left square has the tag coordinates (-1,-1) because a coordinate of (0,0) would be the same as an empty point
-'Need to fix checking, king moves and checkmate as
-'Everything to do with the king is very slow
 Imports System.Diagnostics.Eventing.Reader
 Imports System.DirectoryServices.ActiveDirectory
 Imports System.Drawing.Imaging
