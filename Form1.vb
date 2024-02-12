@@ -1,20 +1,89 @@
 'The top left square has the tag coordinates (-1,-1) because a coordinate of (0,0) would be the same as an empty point
-'Need to fix checking, king moves and checkmate as
-'Everything to do with the king is very slow
-
 Public Class Form1
     Private SelectedPiecePosition As Point
     Public Board As New ChessBoard
-    
+    Public PicTable As New Dictionary(Of Point, PictureBox)
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Board.InitializeBoard()
+        PicTable(New Point(0, 0)) = PicA8
+        PicTable(New Point(1, 0)) = PicB8
+        PicTable(New Point(2, 0)) = PicC8
+        PicTable(New Point(3, 0)) = PicD8
+        PicTable(New Point(4, 0)) = PictureBox3
+        PicTable(New Point(5, 0)) = PictureBox4
+        PicTable(New Point(6, 0)) = PictureBox5
+        PicTable(New Point(7, 0)) = PictureBox6
+        PicTable(New Point(0, 1)) = PictureBox14
+        PicTable(New Point(1, 1)) = PictureBox13
+        PicTable(New Point(2, 1)) = PictureBox12
+        PicTable(New Point(3, 1)) = PicD7
+        PicTable(New Point(4, 1)) = PictureBox10
+        PicTable(New Point(5, 1)) = PictureBox9
+        PicTable(New Point(6, 1)) = PictureBox9
+        PicTable(New Point(7, 1)) = PictureBox7
+        PicTable(New Point(0, 2)) = PictureBox30
+        PicTable(New Point(1, 2)) = PictureBox29
+        PicTable(New Point(2, 2)) = PictureBox28
+        PicTable(New Point(3, 2)) = PicD6
+        PicTable(New Point(4, 2)) = PictureBox26
+        PicTable(New Point(5, 2)) = PictureBox25
+        PicTable(New Point(6, 2)) = PictureBox24
+        PicTable(New Point(7, 2)) = PictureBox23
+        PicTable(New Point(0, 3)) = PictureBox22
+        PicTable(New Point(1, 3)) = PictureBox21
+        PicTable(New Point(2, 3)) = PictureBox20
+        PicTable(New Point(3, 3)) = PicD5
+        PicTable(New Point(4, 3)) = PictureBox18
+        PicTable(New Point(5, 3)) = PictureBox17
+        PicTable(New Point(6, 3)) = PictureBox16
+        PicTable(New Point(7, 3)) = PictureBox15
+        PicTable(New Point(0, 4)) = PictureBox62
+        PicTable(New Point(1, 4)) = PictureBox61
+        PicTable(New Point(2, 4)) = PictureBox60
+        PicTable(New Point(3, 4)) = PicD4
+        PicTable(New Point(4, 4)) = PictureBox58
+        PicTable(New Point(5, 4)) = PictureBox57
+        PicTable(New Point(6, 4)) = PictureBox56
+        PicTable(New Point(7, 4)) = PictureBox55
+        PicTable(New Point(0, 5)) = PictureBox54
+        PicTable(New Point(1, 5)) = PictureBox53
+        PicTable(New Point(2, 5)) = PictureBox52
+        PicTable(New Point(3, 5)) = PicD3
+        PicTable(New Point(4, 5)) = PictureBox50
+        PicTable(New Point(5, 5)) = PictureBox49
+        PicTable(New Point(6, 5)) = PictureBox48
+        PicTable(New Point(7, 5)) = PictureBox47
+        PicTable(New Point(0, 6)) = PictureBox46
+        PicTable(New Point(1, 6)) = PictureBox45
+        PicTable(New Point(2, 6)) = PictureBox44
+        PicTable(New Point(3, 6)) = PicD2
+        PicTable(New Point(4, 6)) = PictureBox42
+        PicTable(New Point(5, 6)) = PictureBox41
+        PicTable(New Point(6, 6)) = PictureBox40
+        PicTable(New Point(7, 6)) = PictureBox39
+        PicTable(New Point(0, 7)) = PictureBox38
+        PicTable(New Point(1, 7)) = PictureBox37
+        PicTable(New Point(2, 7)) = PictureBox36
+        PicTable(New Point(3, 7)) = PicD1
+        PicTable(New Point(4, 7)) = PictureBox34
+        PicTable(New Point(5, 7)) = PictureBox33
+        PicTable(New Point(6, 7)) = PictureBox32
+        PicTable(New Point(7, 7)) = PictureBox31
     End Sub
 
     Private Sub ChessSquare_Click(sender As Object, e As EventArgs) Handles PicA8.Click, PicB8.Click, PicC8.Click, PicD8.Click, PictureBox3.Click, PictureBox4.Click, PictureBox5.Click, PictureBox6.Click, PictureBox7.Click, PictureBox8.Click, PictureBox9.Click, PictureBox10.Click, PicD7.Click, PictureBox12.Click, PictureBox13.Click, PictureBox14.Click, PictureBox15.Click, PictureBox16.Click, PictureBox17.Click, PictureBox18.Click, PicD5.Click, PictureBox20.Click, PictureBox21.Click, PictureBox22.Click, PictureBox23.Click, PictureBox24.Click, PictureBox25.Click, PictureBox26.Click, PicD6.Click, PictureBox28.Click, PictureBox29.Click, PictureBox30.Click, PictureBox39.Click, PictureBox40.Click, PictureBox41.Click, PictureBox42.Click, PicD2.Click, PictureBox44.Click, PictureBox45.Click, PictureBox46.Click, PictureBox47.Click, PictureBox48.Click, PictureBox49.Click, PictureBox50.Click, PicD3.Click, PictureBox52.Click, PictureBox53.Click, PictureBox54.Click, PictureBox55.Click, PictureBox56.Click, PictureBox57.Click, PictureBox58.Click, PicD4.Click, PictureBox60.Click, PictureBox61.Click, PictureBox62.Click, PictureBox31.Click, PictureBox32.Click, PictureBox33.Click, PictureBox34.Click, PicD1.Click, PictureBox36.Click, PictureBox37.Click, PictureBox38.Click
         Dim ClickedPicture As PictureBox = DirectCast(sender, PictureBox)
         Dim ClickedPosition As New Point
-        Dim SelectedPiece As ChessPiece = Board.GetPiece(SelectedPiecePosition)
         Dim ClickedPiece As ChessPiece
+        Dim SelectedPiece As ChessPiece
+
+        If SelectedPiecePosition.X = -1 Then
+            SelectedPiece = Board.GetPiece(New Point(0, 0))
+        Else
+            SelectedPiece = Board.GetPiece(SelectedPiecePosition)
+        End If
+
         If ClickedPicture.Tag(0) <> "-" Then
             ClickedPosition.X = Val(ClickedPicture.Tag(0))
             ClickedPosition.Y = Val(ClickedPicture.Tag(2))
@@ -24,7 +93,7 @@ Public Class Form1
             ClickedPosition.Y = -1
             ClickedPiece = Board.GetPiece(New Point(0, 0))
         End If
-
+        Application.DoEvents()
         If SelectedPiecePosition = ClickedPosition Then
             SelectedPiecePosition = Point.Empty
             ResetMovesOnUI()
@@ -78,47 +147,41 @@ Public Class Form1
             If Board.CanMove(ActualClick, ActualSelect) Then
                 MovePieceOnUI(ClickedPicture, ActualSelect)
                 Board.MovePiece(ActualClick, ActualSelect)
+                DidGameEnd(SelectedPiece)
             End If
 
-            If Board.DeliveredCheck(SelectedPiece) Then
-                If Board.DeliveredCheckMate(SelectedPiece) Then
-                    If Board.WhiteTurn Then
-                        MsgBox("Checkmate, Black Wins!!!")
-                    Else
-                        MsgBox("Checkmate, White Wins!!!")
-                    End If
-                    End
-                End If
-            End If
+
         End If
         SelectedPiecePosition = Point.Empty
     End Sub
     Public Sub ShowMovesOnUI(Piece As ChessPiece)
-        If Not Board.KingInCheck(Piece) Then
-            Piece.UpdateLegalMoves(Board)
-        Else
+        'Consider returning that piece that checked when using king in check
+        If Board.KingInCheck(Piece) Then
             Piece.ShowOnlyCheckBlocks(Board)
+        Else
+            Piece.UpdateLegalMoves(Board)
         End If
 
         For y = 0 To 7
             For x = 0 To 7
                 If Piece.LegalMoves(x, y) Then
-                    If x = 0 AndAlso y = 0 Then
-                        PicA8.BackColor = Color.Red
-                    End If
-                    For Each cntrl As Control In Controls
-                        If TypeOf cntrl Is PictureBox Then
-                            Dim i As Integer = Val(cntrl.Tag(0))
-                            Dim j As Integer = Val(cntrl.Tag(2))
-
-                            If x = i AndAlso y = j Then
-                                cntrl.BackColor = Color.Red
-                            End If
-                        End If
-                    Next
+                    PicTable(New Point(x, y)).BackColor = Color.Red
                 End If
             Next
         Next
+    End Sub
+
+    Public Sub DidGameEnd(SelectedPiece As ChessPiece)
+        If Board.DeliveredCheck(SelectedPiece) Then
+            If Board.DeliveredCheckMate(SelectedPiece) Then
+                If Board.WhiteTurn Then
+                    MsgBox("Checkmate, Black Wins!!!")
+                Else
+                    MsgBox("Checkmate, White Wins!!!")
+                End If
+                End
+            End If
+        End If
     End Sub
 
     Public Sub ResetMovesOnUI()
@@ -180,28 +243,11 @@ Public Class Form1
             Else
                 OffsetY = -1
             End If
-
-            For Each img As PictureBox In Controls
-                Dim picx As Integer = Val(img.Tag(0))
-                Dim picy As Integer = Val(img.Tag(2))
-
-                If picx = X AndAlso picy = Y + OffsetY Then
-                    PieceToRemove = img
-                    RemovingFound = True
-
-                ElseIf picx = MovingPiece.PosX AndAlso picy = MovingPiece.PosY Then
-                    MovingPawn = img
-                    MovingFound = True
-                End If
-
-                If MovingFound AndAlso RemovingFound Then
-                    ClickedPicture.Image = MovingPawn.Image
-                    PieceToRemove.Image = Nothing
-                    MovingPawn.Image = Nothing
-                    Exit For
-                End If
-
-            Next
+            PieceToRemove = PicTable(New Point(X, Y + OffsetY))
+            MovingPawn = PicTable(New Point(MovingPiece.PosX, MovingPiece.PosY))
+            ClickedPicture.Image = MovingPawn.Image
+            PieceToRemove.Image = Nothing
+            MovingPawn.Image = Nothing
 
         Else
             NormalUISwap(ClickedPicture, selectedPiecePosition)
@@ -215,18 +261,8 @@ Public Class Form1
             Exit Sub
         End If
 
-        For Each cntrl As Control In Controls
-            If TypeOf cntrl Is PictureBox Then
-                Dim x As Integer = Val(cntrl.Tag(0))
-                Dim y As Integer = Val(cntrl.Tag(2))
-
-                If x = selectedPiecePosition.X AndAlso y = selectedPiecePosition.Y Then
-                    ClickedPicture.Image = DirectCast(cntrl, PictureBox).Image
-                    DirectCast(cntrl, PictureBox).Image = Nothing
-                    Exit For
-                End If
-            End If
-        Next
+        ClickedPicture.Image = PicTable(selectedPiecePosition).Image
+        PicTable(selectedPiecePosition).Image = Nothing
     End Sub
 
     Public Enum ChessColour
@@ -325,7 +361,7 @@ Public Class Form1
                 Next
             Next
         End Sub
-        Function DeliveredCheck(Piece As ChessPiece)
+        Public Function DeliveredCheck(Piece As ChessPiece)
             Dim King As King = Piece.OpposingKing
             Piece.UpdatePseudoLegalMoves(Me)
             If Piece.LegalMoves(King.PosX, King.PosY) Then
@@ -447,10 +483,17 @@ Public Class Form1
             Dim MovingPiece As ChessPiece = Move.MovingPiece
             Dim OldPieceSpot As Point = Move.OldPieceSpot
             Dim SpotToFill As Point = Move.SpotToFill
-            MovingPiece.PosX = OldPieceSpot.X
-            MovingPiece.PosY = OldPieceSpot.Y
-            Board(OldPieceSpot.X, OldPieceSpot.Y) = Board(SpotToFill.X, SpotToFill.Y)
-            Board(SpotToFill.X, SpotToFill.Y) = OldPiece
+            If OldPiece IsNot Nothing AndAlso MovingPiece.GetType() = GetType(King) AndAlso OldPiece.GetType = GetType(Rook) AndAlso MovingPiece.Colour = OldPiece.Colour Then
+                UndoCastle(MovingPiece, OldPiece)
+                'different for en passant
+            ElseIf MovingPiece.GetType = GetType(Pawn) AndAlso OldPiece Is Nothing AndAlso SpotToFill.X <> OldPieceSpot.X Then
+                UndoEnPassant(SpotToFill, OldPieceSpot, MovingPiece, OldPiece)
+            Else
+                MovingPiece.PosX = OldPieceSpot.X
+                MovingPiece.PosY = OldPieceSpot.Y
+                Board(OldPieceSpot.X, OldPieceSpot.Y) = Board(SpotToFill.X, SpotToFill.Y)
+                Board(SpotToFill.X, SpotToFill.Y) = OldPiece
+            End If
             MovingPiece.ResetAttributes(MoveStack)
             If OldPiece IsNot Nothing Then
                 OldPiece.Out = False
@@ -471,12 +514,30 @@ Public Class Form1
                 Board(OldPieceSpot.X, OldPieceSpot.Y) = Nothing
                 Dim PieceToRemove = Pieces.Find(Function(item) item.PosX = SpotToFill.X AndAlso item.PosY = SpotToFill.Y - 1)
                 PieceToRemove.Out = True
-
-
             End If
             Board(SpotToFill.X, SpotToFill.Y).PosX = SpotToFill.X
             Board(SpotToFill.X, SpotToFill.Y).PosY = SpotToFill.Y
         End Sub
+        Public Sub UndoEnPassant(SpotToFill As Point, OldPieceSpot As Point, MovingPiece As ChessPiece, OldPiece As ChessPiece)
+            If MovingPiece.Colour = ChessColour.White Then
+                Board(OldPieceSpot.X, OldPieceSpot.Y) = MovingPiece
+                Board(SpotToFill.X, SpotToFill.Y + 1) = OldPiece
+                Board(SpotToFill.X, SpotToFill.Y) = Nothing
+                MovingPiece.PosX = OldPieceSpot.X
+                MovingPiece.PosY = OldPieceSpot.Y
+                OldPiece.PosX = SpotToFill.X
+                OldPiece.PosY = SpotToFill.Y + 1
+            Else
+                Board(OldPieceSpot.X, OldPieceSpot.Y) = MovingPiece
+                Board(SpotToFill.X, SpotToFill.Y - 1) = OldPiece
+                Board(SpotToFill.X, SpotToFill.Y) = Nothing
+                MovingPiece.PosX = OldPieceSpot.X
+                MovingPiece.PosY = OldPieceSpot.Y
+                OldPiece.PosX = SpotToFill.X
+                OldPiece.PosY = SpotToFill.Y - 1
+            End If
+        End Sub
+
         Public Sub Castle(ByRef King As King, ByRef Rook As Rook)
             Board(King.PosX, King.PosY) = Nothing
             Board(Rook.PosX, Rook.PosY) = Nothing
@@ -493,6 +554,23 @@ Public Class Form1
             End If
             King.HasMoved = True
             Rook.HasMoved = True
+        End Sub
+
+        Public Sub UndoCastle(MovingPiece As ChessPiece, OldPiece As ChessPiece)
+            Board(MovingPiece.PosX, MovingPiece.PosY) = Nothing
+            Board(OldPiece.PosX, OldPiece.PosY) = Nothing
+            If OldPiece.PosX > MovingPiece.PosX Then
+                Board(MovingPiece.PosX + 2, MovingPiece.PosY) = MovingPiece
+                Board(OldPiece.PosX - 3, MovingPiece.PosY) = OldPiece
+                MovingPiece.PosX += 2
+                OldPiece.PosX -= 3
+            Else
+                Board(MovingPiece.PosX - 2, MovingPiece.PosY) = MovingPiece
+                Board(OldPiece.PosX + 2, OldPiece.PosY) = OldPiece
+                MovingPiece.PosX -= 2
+                OldPiece.PosX += 2
+            End If
+
         End Sub
 
         Public Function CanMove(SpotToFill As Point, OldPieceSpot As Point)
@@ -563,6 +641,7 @@ Public Class Form1
             Next
         End Sub
         Public Sub ShowOnlyCheckBlocks(Board As ChessBoard)
+            UpdatePseudoLegalMoves(Board)
             Dim ListToSearch As List(Of ChessPiece)
             If Colour = ChessColour.Black Then
                 ListToSearch = Board.WhitePieces
@@ -571,22 +650,33 @@ Public Class Form1
             End If
             Dim MovesThatBlock As New List(Of ChessMove)
             For Each Piece In ListToSearch
-                If Piece.LegalMoves(King.PosX, King.PosY) Then
+                If Not Piece.Out AndAlso Piece.LegalMoves(King.PosX, King.PosY) Then
                     For x = 0 To 7
                         For y = 0 To 7
-                            Dim SpotToFill = New Point(x, y)
-                            Dim OldPieceSpot = New Point(PosX, PosY)
-                            If Board.CanMove(SpotToFill, OldPieceSpot) Then
-                                Board.MovePiece(SpotToFill, OldPieceSpot)
-                                If Board.KingInCheck(Me) = False Then
-                                    Dim Move As New ChessMove With {
-                                        .MovingPiece = Me,
-                                        .TakenPiece = Piece,
-                                        .OldPieceSpot = OldPieceSpot,
-                                        .SpotToFill = SpotToFill}
-                                    MovesThatBlock.Add(Move)
+                            If LegalMoves(x, y) Then
+                                Dim SpotToFill = New Point(x, y)
+                                Dim OldPieceSpot = New Point(PosX, PosY)
+                                If Board.CanMove(SpotToFill, OldPieceSpot) Then
+                                    Board.MovePiece(SpotToFill, OldPieceSpot)
+                                    If x = Piece.PosX AndAlso y = Piece.PosY Then
+                                        Dim Move As New ChessMove With {
+                                            .SpotToFill = New Point(x, y),
+                                            .TakenPiece = Piece,
+                                            .MovingPiece = Me,
+                                            .OldPieceSpot = New Point(PosX, PosY)}
+                                        MovesThatBlock.Add(Move)
+                                    Else
+                                        If Not Board.DeliveredCheck(Piece) Then
+                                            Dim Move As New ChessMove With {
+                                                .SpotToFill = New Point(x, y),
+                                                .TakenPiece = Piece,
+                                                .MovingPiece = Me,
+                                                .OldPieceSpot = New Point(PosX, PosY)}
+                                            MovesThatBlock.Add(Move)
+                                        End If
+                                    End If
+                                    Board.UndoMove()
                                 End If
-                                Board.UndoMove()
                             End If
                         Next
                     Next
@@ -612,28 +702,46 @@ Public Class Form1
             Dim MovesCanMake As New List(Of ChessMove)
             For Each Piece As ChessPiece In ListToSearch
                 Dim T As Type = Piece.GetType()
-                If Not Piece.Out AndAlso T = GetType(Bishop) OrElse T = GetType(Rook) OrElse T = GetType(Queen) Then
+                If Not Piece.Out AndAlso (T = GetType(Bishop) OrElse T = GetType(Rook) OrElse T = GetType(Queen)) Then
                     Piece.UpdatePseudoLegalMoves(Board)
                     If Piece.LegalMoves(PosX, PosY) AndAlso Not Piece.LegalMoves(King.PosX, King.PosY) Then
                         Board.Board(PosX, PosY) = Nothing
-                        If Board.KingInCheck(Me) Then
+                        If Board.DeliveredCheck(Piece) Then
                             Pinned = True
                             Board.Board(PosX, PosY) = Me
-                            If LegalMoves(Piece.PosX, Piece.PosY) Then
-                                Board.MovePiece(New Point(Piece.PosX, Piece.PosY), New Point(PosX, PosY))
-                                If Not Board.KingInCheck(Me) Then
-                                    Dim Move As New ChessMove With {
-                                    .SpotToFill = New Point(Piece.PosX, Piece.PosY),
-                                    .TakenPiece = Piece,
-                                    .MovingPiece = Me,
-                                    .OldPieceSpot = New Point(PosX, PosY)}
-                                    MovesCanMake.Add(Move)
-                                End If
-                            End If
-                            Board.UndoMove()
-                            End If
-                            Board.Board(PosX, PosY) = Me
+                            For x = 0 To 7
+                                For y = 0 To 7
+                                    If LegalMoves(x, y) Then
+                                        'Consider indexing the board when checking if it doesnt work
+                                        Board.MovePiece(New Point(x, y), New Point(PosX, PosY))
+                                        If x = Piece.PosX AndAlso y = Piece.PosY Then
+                                            Dim Move As New ChessMove With {
+                                            .SpotToFill = New Point(x, y),
+                                            .TakenPiece = Piece,
+                                            .MovingPiece = Me,
+                                            .OldPieceSpot = New Point(PosX, PosY)}
+                                            MovesCanMake.Add(Move)
+                                        Else
+                                            If Not Board.DeliveredCheck(Piece) Then
+                                                Dim Move As New ChessMove With {
+                                                .SpotToFill = New Point(x, y),
+                                                .TakenPiece = Piece,
+                                                .MovingPiece = Me,
+                                                .OldPieceSpot = New Point(PosX, PosY)}
+                                                MovesCanMake.Add(Move)
+                                            End If
+                                        End If
+                                        Board.UndoMove()
+                                    End If
+                                Next
+                            Next
+                        End If
+                        Board.Board(PosX, PosY) = Me
+
                     End If
+                End If
+                If Pinned Then
+                    Exit For
                 End If
             Next
             If Pinned Then
@@ -821,6 +929,26 @@ Public Class Form1
                 HasMoved = False
             End If
         End Sub
+        Private Function IsEnPassantLegal(Board As ChessBoard, PawnToRemove As ChessPiece)
+            Dim Valid As Boolean = True
+            Board.Board(PosX, PosY) = Nothing
+            Board.Board(PawnToRemove.PosX, PawnToRemove.PosY) = Nothing
+            Dim ListToSearch As List(Of ChessPiece)
+            If Colour = ChessColour.Black Then
+                ListToSearch = Board.WhitePieces
+            Else
+                ListToSearch = Board.BlackPieces
+            End If
+            For Each Piece In ListToSearch
+                If Not Piece.Out AndAlso Board.DeliveredCheck(Piece) Then
+                    Valid = False
+                    Exit For
+                End If
+            Next
+            Board.Board(PosX, PosY) = Me
+            Board.Board(PawnToRemove.PosX, PawnToRemove.PosY) = PawnToRemove
+            Return Valid
+        End Function
         Public Overrides Sub UpdatePseudoLegalMoves(Board As ChessBoard)
             ResetLegalMoves()
             Dim Offset1 As Integer
@@ -847,61 +975,43 @@ Public Class Form1
             End Try
 
             Try
-                If PosX = 0 Then
-                    Dim PieceUpperRight As ChessPiece = Board.Board(PosX + 1, PosY + Offset1)
-                    If PieceUpperRight Is Nothing Then
-                        If Board.Board(PosX + 1, PosY) IsNot Nothing Then
-                            If Board.Board(PosX + 1, PosY).GetType = GetType(Pawn) AndAlso Board.Board(PosX + 1, PosY).Colour <> Colour Then
-                                If DirectCast(Board.Board(PosX + 1, PosY), Pawn).JustMoved2 = True Then
-                                    LegalMoves(PosX + 1, PosY - 1) = True
-                                End If
-                            End If
-                        End If
-                    ElseIf PieceUpperRight.Colour <> Colour Then
-                        LegalMoves(PosX + 1, PosY + Offset1) = True
-                    End If
-
-                ElseIf PosX = 7 Then
-                    Dim PieceUpperLeft As ChessPiece = Board.Board(PosX - 1, PosY + Offset1)
-                    If PieceUpperLeft Is Nothing Then
-                        If Board.Board(PosX - 1, PosY) IsNot Nothing Then
-                            If Board.Board(PosX - 1, PosY).GetType = GetType(Pawn) AndAlso Board.Board(PosX - 1, PosY).Colour <> Colour Then
-                                If DirectCast(Board.Board(PosX - 1, PosY), Pawn).JustMoved2 = True Then
-                                    LegalMoves(PosX - 1, PosY + Offset1) = True
-                                End If
-                            End If
-                        End If
-                    ElseIf PieceUpperLeft.Colour <> Colour Then
-                        LegalMoves(PosX - 1, PosY - 1) = True
-                    End If
-                Else
-                    Dim PieceUpperRight As ChessPiece = Board.Board(PosX + 1, PosY + Offset1)
-                    Dim PieceUpperLeft As ChessPiece = Board.Board(PosX - 1, PosY + Offset1)
-                    If PieceUpperRight Is Nothing Then
-                        If Board.Board(PosX + 1, PosY) IsNot Nothing Then
-                            If Board.Board(PosX + 1, PosY).GetType = GetType(Pawn) AndAlso Board.Board(PosX + 1, PosY).Colour <> Colour Then
-                                If DirectCast(Board.Board(PosX + 1, PosY), Pawn).JustMoved2 = True Then
+                Dim PieceUpperRight As ChessPiece = Board.Board(PosX + 1, PosY + Offset1)
+                If PieceUpperRight Is Nothing Then
+                    If Board.Board(PosX + 1, PosY) IsNot Nothing Then
+                        If Board.Board(PosX + 1, PosY).GetType = GetType(Pawn) AndAlso Board.Board(PosX + 1, PosY).Colour <> Colour Then
+                            If DirectCast(Board.Board(PosX + 1, PosY), Pawn).JustMoved2 = True Then
+                                If IsEnPassantLegal(Board, Board.Board(PosX + 1, PosY)) Then
                                     LegalMoves(PosX + 1, PosY + Offset1) = True
                                 End If
                             End If
                         End If
-                    ElseIf PieceUpperRight.Colour <> Colour Then
-                        LegalMoves(PosX + 1, PosY + Offset1) = True
                     End If
-                    If PieceUpperLeft Is Nothing Then
-                        If Board.Board(PosX - 1, PosY) IsNot Nothing Then
-                            If Board.Board(PosX - 1, PosY).GetType = GetType(Pawn) AndAlso Board.Board(PosX - 1, PosY).Colour <> Colour Then
-                                If DirectCast(Board.Board(PosX - 1, PosY), Pawn).JustMoved2 = True Then
+                ElseIf PieceUpperRight.Colour <> Colour Then
+                    LegalMoves(PosX + 1, PosY + Offset1) = True
+                End If
+            Catch
+
+            End Try
+
+            Try
+                Dim PieceUpperLeft As ChessPiece = Board.Board(PosX - 1, PosY + Offset1)
+                If PieceUpperLeft Is Nothing Then
+                    If Board.Board(PosX - 1, PosY) IsNot Nothing Then
+                        If Board.Board(PosX - 1, PosY).GetType = GetType(Pawn) AndAlso Board.Board(PosX - 1, PosY).Colour <> Colour Then
+                            If DirectCast(Board.Board(PosX - 1, PosY), Pawn).JustMoved2 = True Then
+                                If IsEnPassantLegal(Board, Board.Board(PosX - 1, PosY)) Then
                                     LegalMoves(PosX - 1, PosY + Offset1) = True
                                 End If
                             End If
                         End If
-                    ElseIf PieceUpperLeft.Colour <> Colour Then
-                        LegalMoves(PosX - 1, PosY + Offset1) = True
                     End If
+                ElseIf PieceUpperLeft.Colour <> Colour Then
+                    LegalMoves(PosX - 1, PosY + Offset1) = True
                 End If
-            Catch
+            Catch ex As Exception
+
             End Try
+
         End Sub
     End Class
 
@@ -1018,6 +1128,7 @@ Public Class Form1
             Catch ex As Exception
             End Try
             Dim ListToSearch As List(Of ChessPiece)
+            Dim CanCastle As Boolean = True
             If Colour = ChessColour.Black Then
                 ListToSearch = Board.WhitePieces
             Else
@@ -1081,90 +1192,107 @@ Public Class Form1
                                 Dim UpRight As New Point(Piece.PosX + 1, Piece.PosY - 1)
                                 Try
                                     LegalMoves(UpLeft.X, UpLeft.Y) = False
-                                Catch ex As Exception
+                                Catch
 
                                 End Try
 
                                 Try
                                     LegalMoves(UpRight.X, UpRight.Y) = False
-                                Catch ex As Exception
+                                Catch
 
                                 End Try
                             End If
                         Case Else
                             Piece.UpdatePseudoLegalMoves(Board)
-                            For i = 0 To 7
-                                For j = 0 To 7
-                                    If Piece.GetType IsNot GetType(King) Then
-                                        If Piece.LegalMoves(i, j) Then
-                                            LegalMoves(i, j) = False
+                            For x = PosX - 1 To PosX + 1
+                                For y = PosY - 1 To PosY + 1
+                                    Try
+                                        If x <> PosX OrElse y <> PosY Then
+                                            If Piece.LegalMoves(x, y) Then
+                                                LegalMoves(x, y) = False
+                                            End If
                                         End If
-                                    End If
+                                    Catch
+
+                                    End Try
                                 Next
                             Next
+                            If Piece.LegalMoves(PosX, PosY) Then
+                                Try
+                                    LegalMoves(PosX - 3, PosY) = False
+                                Catch
+                                End Try
+                                Try
+                                    LegalMoves(PosX + 2, PosY) = False
+                                Catch
+                                End Try
+                                CanCastle = False
+                            End If
+
                     End Select
                 End If
             Next
 
-
-            If Not HasMoved Then
-                Dim LeftEmpty As Boolean = True
-                Dim RightEmpty As Boolean = True
-                For x = PosX - 1 To 1 Step -1
-                    If Board.Board(x, PosY) IsNot Nothing Then
-                        LeftEmpty = False
-                        Exit For
+            If CanCastle Then
+                If Not HasMoved Then
+                    Dim LeftEmpty As Boolean = True
+                    Dim RightEmpty As Boolean = True
+                    For x = PosX - 1 To 1 Step -1
+                        If Board.Board(x, PosY) IsNot Nothing Then
+                            LeftEmpty = False
+                            Exit For
+                        End If
+                    Next
+                    For x = PosX + 1 To 6
+                        If Board.Board(x, PosY) IsNot Nothing Then
+                            RightEmpty = False
+                            Exit For
+                        End If
+                    Next
+                    Dim CanShortCastle As Boolean = True
+                    Dim CanLongCastle As Boolean = True
+                    If Colour = ChessColour.Black Then
+                        ListToSearch = Board.WhitePieces
+                    Else
+                        ListToSearch = Board.BlackPieces
                     End If
-                Next
-                For x = PosX + 1 To 6
-                    If Board.Board(x, PosY) IsNot Nothing Then
-                        RightEmpty = False
-                        Exit For
-                    End If
-                Next
-                Dim CanShortCastle As Boolean = True
-                Dim CanLongCastle As Boolean = True
-                If Colour = ChessColour.Black Then
-                    ListToSearch = Board.WhitePieces
-                Else
-                    ListToSearch = Board.BlackPieces
-                End If
-                If RightEmpty Then
-                    If Board.Board(PosX + 3, PosY).GetType = GetType(Rook) AndAlso DirectCast(Board.Board(PosX + 3, PosY), Rook).HasMoved = False Then
-                        For x = PosX To PosX + 2
-                            For Each piece In ListToSearch
-                                If Not piece.Out AndAlso piece.LegalMoves(x, PosY) = True Then
-                                    CanShortCastle = False
-                                    Exit For
-                                End If
+                    If RightEmpty Then
+                        If Board.Board(PosX + 3, PosY).GetType = GetType(Rook) AndAlso DirectCast(Board.Board(PosX + 3, PosY), Rook).HasMoved = False Then
+                            For x = PosX To PosX + 2
+                                For Each piece In ListToSearch
+                                    If Not piece.Out AndAlso piece.LegalMoves(x, PosY) = True Then
+                                        CanShortCastle = False
+                                        Exit For
+                                    End If
+                                Next
                             Next
-                        Next
 
+                        End If
+                    Else
+                        CanShortCastle = False
                     End If
-                Else
-                    CanShortCastle = False
-                End If
 
-                If LeftEmpty Then
-                    If Board.Board(PosX - 4, PosY).GetType = GetType(Rook) AndAlso DirectCast(Board.Board(PosX - 4, PosY), Rook).HasMoved = False Then
-                        For x = PosX - 1 To PosX - 3 Step -1
-                            For Each piece In ListToSearch
-                                If Not piece.Out AndAlso piece.LegalMoves(x, PosY) = True Then
-                                    CanLongCastle = False
-                                    Exit For
-                                End If
+                    If LeftEmpty Then
+                        If Board.Board(PosX - 4, PosY).GetType = GetType(Rook) AndAlso DirectCast(Board.Board(PosX - 4, PosY), Rook).HasMoved = False Then
+                            For x = PosX - 1 To PosX - 3 Step -1
+                                For Each piece In ListToSearch
+                                    If Not piece.Out AndAlso piece.LegalMoves(x, PosY) = True Then
+                                        CanLongCastle = False
+                                        Exit For
+                                    End If
+                                Next
                             Next
-                        Next
 
+                        End If
+                    Else
+                        CanLongCastle = False
                     End If
-                Else
-                    CanLongCastle = False
-                End If
-                If CanLongCastle Then
-                    LegalMoves(PosX - 4, PosY) = True
-                End If
-                If CanShortCastle Then
-                    LegalMoves(PosX + 3, PosY) = True
+                    If CanLongCastle Then
+                        LegalMoves(PosX - 4, PosY) = True
+                    End If
+                    If CanShortCastle Then
+                        LegalMoves(PosX + 3, PosY) = True
+                    End If
                 End If
             End If
         End Sub
