@@ -425,7 +425,7 @@ Public Class Form1
                 NormalMove(SpotToFill, OldPieceSpot, MovingPiece, TakenPiece)
             End If
 
-            'After we do a move every other pawn of that colour didnt (just move 2) as it would have moved 2 on the last turn
+            'After we do a move every other pawn of that colour didnt (just move 2) as it would have moved 2 on this turn
             Dim ListToSearch = If(MovingPiece.Colour = ChessColour.Black, BlackPieces, WhitePieces)
             For Each p As ChessPiece In ListToSearch
                 If Not p.Out AndAlso p.GetType() = GetType(Pawn) AndAlso p IsNot MovingPiece Then
