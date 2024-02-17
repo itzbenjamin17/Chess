@@ -701,7 +701,7 @@ Public Class Form1
             Pinned = False
             Dim ListToSearch = If(Colour = ChessColour.Black, Board.WhitePieces, Board.BlackPieces)
             Dim MovesCanMake As New List(Of ChessMove)
-
+            UpdatePseudoLegalMoves(Board)
             For Each AttackingPiece As ChessPiece In ListToSearch
                 Dim T As Type = AttackingPiece.GetType()
                 If Not AttackingPiece.Out AndAlso (T = GetType(Bishop) OrElse T = GetType(Rook) OrElse T = GetType(Queen)) Then
